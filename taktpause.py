@@ -4354,7 +4354,8 @@ def linux_data_dir(environ: Any = None, home: Path | None = None) -> Path:
         if legacy.exists():
             return legacy
     xdg = str(env.get("XDG_DATA_HOME", "") or "").strip()
-    base = Path(xdg) if xdg and Path(xdg).is_absolute() else home / ".local" / "share"
+    # A POSIX check, so the self-test gives the same answer on Windows.
+    base = Path(xdg) if xdg.startswith("/") else home / ".local" / "share"
     return base / "taktpause"
 
 
