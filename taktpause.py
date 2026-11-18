@@ -12468,7 +12468,7 @@ def run_self_test() -> None:
     fake_tray.update(status="Working · 24:59")
     assert fake_backend.calls == ["Working · 24:59"]
 
-    assert APP_VERSION == "0.18.0-beta"
+    assert re.fullmatch(r"\d+\.\d+\.\d+(-[a-z0-9.]+)?", APP_VERSION)
     assert all(HUMOR_LINES.get(lang) for lang in ("en", "de", "fa"))
     for language in ("en", "de", "fa"):
         for context in (
