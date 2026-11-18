@@ -1,0 +1,2 @@
+# Extra package for building Taktpause.exe on Windows.
+pyinstaller==6.22.3

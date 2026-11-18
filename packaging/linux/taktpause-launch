@@ -1,0 +1,40 @@
+#!/bin/sh
+# Taktpause launcher inside the snap.
+# Points Python, Tcl/Tk, fonts and sound to the files bundled in the snap.
+set -e
+
+# Libraries staged in the snap (Tcl/Tk, X11 helpers, libnotify, libpulse).
+# libpulse looks for its private helper library in .../pulseaudio, a fixed
+# system path that does not exist inside the snap, so add that folder too.
+for dir in "$SNAP"/usr/lib/*-linux-gnu/pulseaudio "$SNAP"/usr/lib/*-linux-gnu "$SNAP"/usr/lib; do
+  if [ -d "$dir" ]; then
+    LD_LIBRARY_PATH="$dir${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+  fi
+done
+export LD_LIBRARY_PATH
+
+# Helper programs staged in the snap (notify-send, paplay, gdbus).
+export PATH="$SNAP/usr/bin:$SNAP/bin:$PATH"
+
+# Tcl/Tk script libraries.
+export TCL_LIBRARY="$SNAP/usr/share/tcltk/tcl8.6"
+export TK_LIBRARY="$SNAP/usr/share/tcltk/tk8.6"
+
+# Fonts: bundled fontconfig rules; the host fonts come in through the desktop plug.
+if [ -f "$SNAP/etc/fonts/fonts.conf" ]; then
+  export FONTCONFIG_PATH="$SNAP/etc/fonts"
+  export FONTCONFIG_FILE="$SNAP/etc/fonts/fonts.conf"
+fi
+if [ -d "$SNAP/usr/share/X11/locale" ]; then
+  export XLOCALEDIR="$SNAP/usr/share/X11/locale"
+fi
+
+# Sound: the snap gets its own XDG_RUNTIME_DIR, so point libpulse at the
+# user's real PulseAudio/PipeWire socket.
+if [ -z "${PULSE_SERVER:-}" ]; then
+  export PULSE_SERVER="unix:/run/user/$(id -u)/pulse/native"
+fi
+
+export XDG_DATA_DIRS="$SNAP/usr/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+
+exec "$SNAP/bin/python3" "$SNAP/taktpause/taktpause.py" "$@"

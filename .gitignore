@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# PyInstaller and snap builds
+build/
+dist/
+*.spec
+*.snap
+parts/
+stage/
+prime/
+
+# Editors and systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,90 @@
+name: taktpause
+title: Taktpause
+summary: A calm offline work and break timer for long reading and writing days
+description: |
+  Taktpause is a quiet work and break timer for long stretches of desk work:
+  reading, writing, coding, analysis.
+
+  - Start work or a break with one click. Forgot to press start?
+    "Started earlier" moves the start time back.
+  - Gentle reminders for breaks, water and lunch. Optional mild humour,
+    off by default.
+  - A calm, clear design: one main action per screen, and a soft colour
+    for focus, breaks and "time is up".
+  - A small round floating timer while the window is minimized (optional).
+  - A weekly view of when you worked, per task, without productivity scores.
+  - English, German and Persian.
+  - Your own wording for reminders (Settings, Messages).
+
+  Privacy: all data stays on your computer. The snap has no network
+  permission, so it cannot go online. No account, no cloud sync, no telemetry.
+
+  Free software under the GNU GPL-3.0. Source code:
+  https://github.com/Farid-python/taktpause
+
+  Made by Farid Rezaei in the Hanseatic City of Bremen. This is a beta.
+adopt-info: taktpause
+base: core24
+grade: stable
+confinement: strict
+license: GPL-3.0-only
+website: https://github.com/Farid-python/taktpause
+source-code: https://github.com/Farid-python/taktpause
+issues: https://github.com/Farid-python/taktpause/issues
+
+platforms:
+  amd64:
+
+apps:
+  taktpause:
+    command: bin/taktpause-launch
+    # The menu entry and icon come from snap/gui/taktpause.desktop and
+    # snap/gui/taktpause.png.
+    plugs:
+      - desktop
+      - desktop-legacy
+      - x11
+      - audio-playback
+
+parts:
+  taktpause:
+    plugin: nil
+    source: .
+    override-build: |
+      install -Dm644 taktpause.py "$CRAFT_PART_INSTALL/taktpause/taktpause.py"
+      install -Dm755 packaging/linux/taktpause-launch "$CRAFT_PART_INSTALL/bin/taktpause-launch"
+      version="$(sed -n 's/^APP_VERSION = "\(.*\)"$/\1/p' taktpause.py)"
+      craftctl set version="$version"
+
+  python-runtime:
+    plugin: python
+    source: packaging/linux
+    python-packages:
+      - sv-ttk==2.6.1
+      - arabic-reshaper==3.0.1
+      - python-bidi==0.6.11
+      - pillow==11.3.0
+    build-packages:
+      - python3-tk
+    override-build: |
+      craftctl default
+      # Python 3.12 is part of the core24 base, so the app can end up running
+      # on the base's Python, which has no Tkinter. Copying Tkinter into the
+      # app's own site-packages makes it importable with either Python.
+      site="$(ls -d "$CRAFT_PART_INSTALL"/lib/python3*/site-packages | head -n 1)"
+      cp -r /usr/lib/python3.12/tkinter "$site/"
+      cp /usr/lib/python3.12/lib-dynload/_tkinter.cpython-312-*.so "$site/"
+    stage-packages:
+      # Bundled Python 3.12 with Tkinter (Tcl/Tk come in as dependencies).
+      - python3-venv
+      - python3-tk
+      # Desktop notifications, sound playback, dark-mode lookup.
+      - libnotify-bin
+      - pulseaudio-utils
+      - libglib2.0-bin
+      - sound-theme-freedesktop
+      # Fallback font and font rules, in case the host fonts are not visible.
+      - fontconfig-config
+      - fonts-dejavu-core
+      # Screen list, so the floating timer appears on a visible monitor.
+      - libxrandr2

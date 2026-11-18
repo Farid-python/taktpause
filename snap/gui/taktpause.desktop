@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Taktpause
+GenericName=Work and break timer
+GenericName[de]=Arbeits- und Pausentimer
+Comment=A calm offline work and break timer
+Comment[de]=Ein ruhiger Offline-Timer für Arbeit und Pausen
+Exec=taktpause
+Icon=${SNAP}/meta/gui/taktpause.png
+Terminal=false
+StartupNotify=false
+StartupWMClass=Taktpause
+Categories=Utility;
+Keywords=timer;pomodoro;break;focus;study;writing;
+Keywords[de]=Timer;Pause;Fokus;Lernen;Schreiben;

@@ -1,0 +1,11 @@
+# Packages Taktpause needs to run from source. Tested with Python 3.12.
+# Install with:  python -m pip install -r requirements.txt
+# Tkinter comes with Python. On Ubuntu or Debian: sudo apt install python3-tk
+sv-ttk==2.6.1
+arabic-reshaper==3.0.1
+python-bidi==0.6.11
+pillow==11.3.0
+
+# Windows only: notification-area icon and window helpers.
+pywin32==311; sys_platform == "win32"
+infi.systray==0.1.12.1; sys_platform == "win32"
