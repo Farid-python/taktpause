@@ -95,6 +95,10 @@ The result is `dist/Taktpause.exe`.
 **On your own Ubuntu computer:** install `snapcraft` and LXD, then run
 `snapcraft pack` in the project folder.
 
+**Publish a release:** change `APP_VERSION` in `taktpause.py`, add
+`docs/release-notes/<tag>.md`, then run **Build** from the Actions tab with a
+release tag such as `v0.18.1`.
+
 ## Licence
 
 Taktpause is free software under the

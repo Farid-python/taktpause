@@ -3,10 +3,16 @@ name: Build
 # Runs when a version tag such as v0.18.0-beta is pushed, and by hand from the
 # Actions tab ("Run workflow"). Forks can use the manual run to build their own
 # Taktpause.exe and snap without installing anything.
+# A manual run with a release tag also publishes a release with that tag.
 on:
   push:
     tags: ["v*"]
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag, for example v0.18.1. Leave empty for a test build without a release."
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -78,9 +84,11 @@ jobs:
 
   release:
     name: Publish the release
-    # Only for version tags. The Windows build must succeed; the snap is
-    # added when its build succeeded too.
-    if: always() && startsWith(github.ref, 'refs/tags/v') && needs.windows.result == 'success'
+    # Only for version tags or a manual run with a release tag. The Windows
+    # build must succeed; the snap is added when its build succeeded too.
+    if: >-
+      always() && needs.windows.result == 'success' &&
+      (startsWith(github.ref, 'refs/tags/v') || inputs.release_tag != '')
     needs: [windows, linux]
     runs-on: ubuntu-24.04
     permissions:
@@ -104,8 +112,12 @@ jobs:
       - name: Create the release
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.ref_name }}
+          TAG: ${{ inputs.release_tag || github.ref_name }}
         run: |
+          case "$TAG" in
+            v[0-9]*) ;;
+            *) echo "The release tag must look like v0.18.1"; exit 1 ;;
+          esac
           prerelease=""
           case "$TAG" in *-*) prerelease="--prerelease" ;; esac
           notes="docs/release-notes/$TAG.md"
@@ -114,4 +126,4 @@ jobs:
           else
             notes_args=(--generate-notes)
           fi
-          gh release create "$TAG" dist/* --title "Taktpause ${TAG#v}" $prerelease "${notes_args[@]}"
+          gh release create "$TAG" dist/* --target "$GITHUB_SHA" --title "Taktpause ${TAG#v}" $prerelease "${notes_args[@]}"
