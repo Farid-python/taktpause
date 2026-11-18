@@ -125,7 +125,7 @@ except (ImportError, OSError):
 
 
 APP_NAME = "Taktpause"
-APP_VERSION = "0.18.1-beta"
+APP_VERSION = "0.18.0-beta"
 AUTHOR_NAME = "Farid Rezaei"
 AUTHOR_LINKEDIN = "https://www.linkedin.com/in/farid-rezaei-bremen/"
 COPYRIGHT_YEAR = 2026
@@ -139,27 +139,6 @@ TRAY_ICON_B64 = "AAABAAgAEBAAAAAAIABIAgAAhgAAABQUAAAAACAA+gIAAM4CAAAYGAAAAAAgADQ
 # The same mark as a single 64px PNG. Tk 8.6 can read PNG straight from
 # base64, so the window icon and the tray icon are one design.
 APP_ICON_PNG_B64 = "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"
-
-
-def ico_png_entries(raw: bytes) -> dict[int, bytes]:
-    """Return the PNG images inside an .ico file, keyed by pixel size."""
-    if len(raw) < 6:
-        raise ValueError("Not an .ico file")
-    reserved, kind, count = struct.unpack("<HHH", raw[:6])
-    if reserved != 0 or kind != 1:
-        raise ValueError("Not an .ico file")
-    entries: dict[int, bytes] = {}
-    for index in range(count):
-        start = 6 + 16 * index
-        if start + 16 > len(raw):
-            break
-        width, _height, _colours, _reserved, _planes, _bpp, size, offset = struct.unpack(
-            "<BBBBHHII", raw[start:start + 16]
-        )
-        data = raw[offset:offset + size]
-        if len(data) == size and data.startswith(b"\x89PNG\r\n\x1a\n"):
-            entries[width or 256] = data
-    return entries
 
 
 def ensure_tray_icon(path: Path) -> str | None:
@@ -5926,29 +5905,17 @@ class TaktpauseApp:
         self.app_icon = None
         try:
             self.app_icon = tk.PhotoImage(data=APP_ICON_PNG_B64)
+            self.root.iconphoto(True, self.app_icon)
         except tk.TclError:
-            LOGGER.debug("Could not load the embedded app icon", exc_info=True)
-        # Give the window every size from the bundled icon, so the title bar,
-        # taskbar and Alt-Tab each get a sharp image. Do not use iconbitmap()
-        # with the .ico: its images are stored as PNG, which Tk's own .ico
-        # reader on Windows cannot read, and the title bar then shows a broken
-        # icon.
-        self._window_icons = []
-        try:
-            entries = ico_png_entries(base64.b64decode(TRAY_ICON_B64))
-            for size in sorted(entries, reverse=True):
-                encoded = base64.b64encode(entries[size]).decode("ascii")
-                self._window_icons.append(tk.PhotoImage(data=encoded))
-        except (tk.TclError, ValueError):
-            LOGGER.debug("Could not load the window icon sizes", exc_info=True)
-            self._window_icons = []
-        if not self._window_icons and self.app_icon is not None:
-            self._window_icons = [self.app_icon]
-        if self._window_icons:
+            LOGGER.debug("Could not apply the embedded window icon", exc_info=True)
+        if platform.system() == "Windows":
+            # The .ico additionally gives the taskbar and Alt-Tab the right sizes.
             try:
-                self.root.iconphoto(True, *self._window_icons)
+                ico_path = ensure_tray_icon(self.data_dir / "taktpause_tray.ico")
+                if ico_path:
+                    self.root.iconbitmap(default=ico_path)
             except tk.TclError:
-                LOGGER.debug("Could not apply the window icon", exc_info=True)
+                LOGGER.debug("Could not apply the window .ico", exc_info=True)
 
     def _tray_menu_labels(self) -> dict[str, str]:
         return {
@@ -12580,8 +12547,6 @@ def run_self_test() -> None:
     assert set(V0180_TRANSLATIONS["en"]) == set(V0180_TRANSLATIONS["de"]) == set(V0180_TRANSLATIONS["fa"])
     assert set(OPEN_SOURCE_TRANSLATIONS["en"]) == set(OPEN_SOURCE_TRANSLATIONS["de"]) == set(OPEN_SOURCE_TRANSLATIONS["fa"])
     assert PROJECT_URL.startswith("https://github.com/")
-    icon_sizes = ico_png_entries(base64.b64decode(TRAY_ICON_B64))
-    assert {16, 32, 48, 256} <= set(icon_sizes)
     mini_settings = {**DEFAULT_SETTINGS, "mini_timer": "yes", "mini_timer_position": "bad"}
     sanitize_settings(mini_settings)
     assert mini_settings["mini_timer"] is DEFAULT_SETTINGS["mini_timer"] and mini_settings["mini_timer_position"] == ""
