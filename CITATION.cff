@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use or mention Taktpause, please cite it as below."
+title: "Taktpause: a calm, offline work and break timer"
+type: software
+authors:
+  - given-names: Faridoddin
+    family-names: Rezaei
+    alias: Farid Rezaei
+    affiliation: "Bremen, Germany"
+version: 0.18.0-beta
+date-released: 2026-11-18
+license: GPL-3.0-only
+repository-code: "https://github.com/Farid-python/taktpause"
+url: "https://github.com/Farid-python/taktpause"
+abstract: >-
+  Taktpause is a free, open-source break reminder and focus timer for
+  Windows and Ubuntu Linux. It reminds you to take breaks and to start
+  again, and shows when you worked, per day and per task. It works offline
+  and keeps all data on the user's computer.
+keywords:
+  - break reminder
+  - focus timer
+  - pomodoro
+  - work timer
+  - productivity
+  - researchers
+  - offline
+  - privacy

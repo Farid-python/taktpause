@@ -1,7 +1,10 @@
 # Taktpause
 
 A calm, offline work and break timer for long reading and writing days.
-For Windows and Ubuntu Linux, in English, German and Persian.
+Taktpause is a free break reminder and Pomodoro-style focus timer for Windows
+and Ubuntu Linux, in English, German and Persian. Made by Faridoddin (Farid)
+Rezaei for researchers, PhD students and anyone who works long hours at a
+computer.
 
 ![Taktpause screens: focus, time for a break, "Started earlier", break, light and dark](docs/screenshot-main.png)
 
@@ -114,8 +117,11 @@ Taktpause is free software under the
 
 ## Author
 
-Created by [Farid Rezaei](https://www.linkedin.com/in/farid-rezaei-bremen/),
+Created by [Faridoddin (Farid) Rezaei](https://www.linkedin.com/in/farid-rezaei-bremen/),
 researching AI and marketing, in the Hanseatic City of Bremen.
+
+To cite Taktpause, use **Cite this repository** on the right side of this
+page (from [CITATION.cff](CITATION.cff)).
 
 Taktpause is a beta. If something breaks or gets in your way, please
 [open an issue](https://github.com/Farid-python/taktpause/issues).
